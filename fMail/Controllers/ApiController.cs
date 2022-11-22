@@ -28,24 +28,36 @@ public class ApiController : ControllerBase
     }
 
     [HttpPost("send")]
-    public async Task<IActionResult> PostSendMails([FromBody] MailInfo mailinfo)
+    public async Task<IActionResult> PostSendMails([FromBody] MailInfo mailInfo)
     {
-        if (mailinfo.CurrentUsername != ConfigParser.CurrentConfig.AdminUsername ||
-            mailinfo.CurrentPassword != ConfigParser.CurrentConfig.AdminPassword)
+        if (mailInfo.CurrentUsername != ConfigParser.CurrentConfig.AdminUsername ||
+            mailInfo.CurrentPassword != ConfigParser.CurrentConfig.AdminPassword)
         {
             return StatusCode(401);
         }
 
-        if (!ConfigParser.TryGetSmtpClient(mailinfo.SmtpId, out ConfigSmtpClient cfgSmtpClient))
+        if (!ConfigParser.TryGetSmtpClient(mailInfo.SmtpId, out ConfigSmtpClient cfgSmtpClient))
             return StatusCode(404);
 
         Task sendMailTask = new Task(() =>
         {
-            SendMails(cfgSmtpClient, mailinfo);
+            SendMails(cfgSmtpClient, mailInfo);
         });
         sendMailTask.Start();
         
         // await SendMailsAsync(cfgSmtpClient, sendMails);
+        return Ok();
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> PostLogin([FromBody] AdminLogin adminLogin)
+    {
+        if (adminLogin.Username != ConfigParser.CurrentConfig.AdminUsername ||
+            adminLogin.Password != ConfigParser.CurrentConfig.AdminPassword)
+        {
+            return StatusCode(401);
+        }
+
         return Ok();
     }
 
@@ -82,6 +94,12 @@ public class ApiController : ControllerBase
                 Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Failed to send mail to {email}...");
             }
         }
+    }
+
+    public struct AdminLogin
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
     
     public struct NewConfig
