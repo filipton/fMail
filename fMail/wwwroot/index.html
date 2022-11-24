@@ -7,18 +7,19 @@
     <title>fMail</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
 </head>
 <body>
-    <form class="loginContainer">
+    <form class="loginContainer" id="loginContainer" onsubmit="return checkLogin()">
         <div>
             <div class="loginGroup">
                 <label id="usernameLabel" class="loginLabel" for="username">Username:</label>
-                <input id="username" class="loginInput" type="text" placeholder="admin" required />
+                <input id="username" class="loginInput" type="text" placeholder="admin" name="username" required />
             </div>
     
             <div class="loginGroup" style="margin-top: 10px;">
                 <label id="passwordLabel" class="loginLabel" for="password">Password:</label>
-                <input id="password" class="loginInput" type="password" placeholder="********" required />
+                <input id="password" class="loginInput" type="password" placeholder="********" name="password" required />
             </div>
     
             <div class="loginGroup" style="margin-top: 20px;">
@@ -26,5 +27,55 @@
             </div>
         </div>
     </form>
+
+    <div id="adminContainer" style="display: none; text-align: center">
+        <h1>Admin Panel</h1>
+
+        <h2>Clients:</h2>
+        <div id="smtpClients">
+            
+        </div>
+        
+        <h2>Add new:</h2>
+        <form class="loginContainer" id="addNewContainer" onsubmit="return addNewSmtp()">
+            <div>
+                <div class="loginGroup">
+                    <label id="smtpIdLabel" class="loginLabel" for="smtpId">Id:</label>
+                    <input id="smtpId" class="loginInput" type="text" name="id" required />
+                </div>
+                
+                <div class="loginGroup">
+                    <label id="newUserLabel" class="loginLabel" for="newUser">Username:</label>
+                    <input id="newUser" class="loginInput" type="text" placeholder="example@example.com" name="user" required />
+                </div>
+
+                <div class="loginGroup" style="margin-top: 10px;">
+                    <label id="newPassLabel" class="loginLabel" for="newPass">Password:</label>
+                    <input id="newPass" class="loginInput" type="text" name="pass" required />
+                </div>
+                
+                <div class="loginGroup" style="margin-top: 10px; display: flex; justify-content: space-between">
+                    <div style="width: 50%">
+                        <label id="newHostLabel" class="loginLabel" for="newHost">Host:</label>
+                        <input id="newHost" class="loginInput" type="text" name="host" required />
+                    </div>
+
+                    <div style="width: 40%">
+                        <label id="newPortLabel" class="loginLabel" for="newPort">Port:</label>
+                        <input id="newPort" class="loginInput" type="number" name="port" required />
+                    </div>
+
+                    <div style="width: 10%">
+                        <label id="sslLabel" class="loginLabel" for="ssl">Ssl:</label>
+                        <input id="ssl" class="loginInput" type="checkbox" name="ssl" />
+                    </div>
+                </div>
+
+                <div class="loginGroup" style="margin-top: 20px;">
+                    <input type="submit" class="loginButton" value="ADD" />
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

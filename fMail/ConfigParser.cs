@@ -7,7 +7,8 @@ public class ConfigParser
 {
     public static Config CurrentConfig;
 
-    // Config path (current directory)
+    // Config path
+    private const string ConfigDir = "config";
     private const string ConfigPath = "config.json";
     
     
@@ -16,7 +17,9 @@ public class ConfigParser
     /// </summary>
     public static async Task LoadConfig()
     {
-        if (!File.Exists(ConfigPath))
+        if (!Directory.Exists(ConfigDir)) Directory.CreateDirectory(ConfigDir);
+        
+        if (!File.Exists(Path.Combine(ConfigDir, ConfigPath)))
         {
             CurrentConfig = new ()
             {
@@ -29,11 +32,12 @@ public class ConfigParser
                               $"with password '{CurrentConfig.AdminPassword}'");
             
             
-            await File.WriteAllTextAsync(ConfigPath, JsonConvert.SerializeObject(CurrentConfig, Formatting.Indented));
+            await File.WriteAllTextAsync(Path.Combine(ConfigDir, ConfigPath), 
+                JsonConvert.SerializeObject(CurrentConfig, Formatting.Indented));
         }
 
         Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Config load...");
-        CurrentConfig = JsonConvert.DeserializeObject<Config>(await File.ReadAllTextAsync(ConfigPath));
+        CurrentConfig = JsonConvert.DeserializeObject<Config>(await File.ReadAllTextAsync(Path.Combine(ConfigDir, ConfigPath)));
     }
 
     /// <summary>
@@ -42,7 +46,7 @@ public class ConfigParser
     public static async Task SaveConfig()
     {
         Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Saving config...");
-        await File.WriteAllTextAsync(ConfigPath, JsonConvert.SerializeObject(CurrentConfig, Formatting.Indented));
+        await File.WriteAllTextAsync(Path.Combine(ConfigDir, ConfigPath), JsonConvert.SerializeObject(CurrentConfig, Formatting.Indented));
     }
 
 

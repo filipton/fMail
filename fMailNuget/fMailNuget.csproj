@@ -12,6 +12,8 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Copyright>filipton @ 2022</Copyright>
         <PackageLicenseUrl>https://choosealicense.com/licenses/mit/#</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/filipton/fMail</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/filipton/fMail</RepositoryUrl>
     </PropertyGroup>
 
 </Project>

@@ -58,7 +58,7 @@ public class ApiController : ControllerBase
             return StatusCode(401);
         }
 
-        return Ok();
+        return Ok(ConfigParser.CurrentConfig.SmtpClients);
     }
 
 
