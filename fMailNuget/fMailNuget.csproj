@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageId>fMail</PackageId>
+        <PackageVersion>0.1</PackageVersion>
+        <Title>fMail Client</Title>
+        <Authors>filipton</Authors>
+        <Description>Easy to use fMail client</Description>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Copyright>filipton @ 2022</Copyright>
+        <PackageLicenseUrl>https://choosealicense.com/licenses/mit/#</PackageLicenseUrl>
+    </PropertyGroup>
+
+</Project>

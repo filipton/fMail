@@ -49,7 +49,7 @@ public class ApiController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("login")]
+    [HttpPost("auth")]
     public async Task<IActionResult> PostLogin([FromBody] AdminLogin adminLogin)
     {
         if (adminLogin.Username != ConfigParser.CurrentConfig.AdminUsername ||

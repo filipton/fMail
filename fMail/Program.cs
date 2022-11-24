@@ -7,7 +7,6 @@ class Program
     public static async Task Main(string[] args)
     {
         await ConfigParser.LoadConfig();
-
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllers();
         
@@ -18,6 +17,6 @@ class Program
         app.UseStaticFiles();
         app.MapControllers();
         
-        await app.RunAsync();    
+        await app.RunAsync();
     }
 }

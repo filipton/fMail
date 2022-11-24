@@ -16,4 +16,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="fMailNuget">
+        <HintPath>..\fMailNuget\bin\Debug\net7.0\fMailNuget.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
